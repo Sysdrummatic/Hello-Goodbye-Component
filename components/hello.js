@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/api/v1/hello", (req, res) => {
   res.json({ message: `Hello World` });
 });
-router.post("/", (req, res) => {
+
+router.post("/api/v1/hello", (req, res) => {
   const name = req.body.name;
   res.json({ message: `Hello ${name}` });
 });
