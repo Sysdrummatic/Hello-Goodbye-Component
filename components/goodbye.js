@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/api/v1/goodbye", (req, res) => {
   res.json({ message: "Goodbye World" });
 });
 
