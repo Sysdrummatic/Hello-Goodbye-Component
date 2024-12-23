@@ -15,7 +15,6 @@ app.use("/api/v1/goodbye", goodbyeEndpoint);
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
+require("dotenv").config();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}/api-docs`)
-);
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -14,10 +14,10 @@
     "paths": {
       "/api/v1/hello": {
         "get": {
-          "summary": "Zwraca wiadomość powitalną",
+          "summary": "Returns a greeting message",
           "responses": {
             "200": {
-              "description": "Wiadomość powitalna",
+              "description": "A greeting message",
               "content": {
                 "application/json": {
                   "schema": {
@@ -25,9 +25,45 @@
                     "properties": {
                       "message": {
                         "type": "string",
-                        "description": "Wiadomość powitalna",
                         "example": "Hello World"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Returns a personalized greeting message",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "YourName"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A personalized greeting message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Hello YourName"
                     }
                   }
                 }

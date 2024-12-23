@@ -1,7 +1,11 @@
 {
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
