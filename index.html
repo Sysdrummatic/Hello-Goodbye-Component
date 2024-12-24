@@ -8,19 +8,30 @@
   <body>
     <h1>Welcome to My API</h1>
     <div>
-      <h2>Call Hello API</h2>
-      <input type="text" id="nameInput" placeholder="Enter your name" />
-      <button onclick="callHelloApi()">Call Hello API</button>
-      <textarea id="helloResponse" rows="4" cols="50" readonly></textarea>
+      <h2>Call Get Hello API</h2>
+      <button onclick="callGetHelloApi()">Call Hello API</button><br />
+      <textarea id="helloGetResponse" rows="4" cols="50" readonly></textarea>
     </div>
     <div>
-      <h2>Call Goodbye API</h2>
-      <button onclick="callGoodbyeApi()">Call Goodbye API</button>
-      <textarea id="goodbyeResponse" rows="4" cols="50" readonly></textarea>
+      <h2>Call Post Hello API</h2>
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button onclick="callPostHelloApi()">Call Hello API</button><br />
+      <textarea id="helloPostResponse" rows="4" cols="50" readonly></textarea>
+    </div>
+    <div>
+      <h2>Call Get Goodbye API</h2>
+      <button onclick="callGetGoodbyeApi()">Call Goodbye API</button><br />
+      <textarea id="goodbyeGetResponse" rows="4" cols="50" readonly></textarea>
     </div>
 
     <script>
-      async function callHelloApi() {
+      async function callGetHelloApi() {
+        const response = await fetch("/.netlify/functions/hello-get");
+        const data = await response.json();
+        document.getElementById("helloGetResponse").value = data.message;
+      }
+
+      async function callPostHelloApi() {
         const name = document.getElementById("nameInput").value;
         const response = await fetch("/.netlify/functions/hello-post", {
           method: "POST",
@@ -30,13 +41,13 @@
           body: JSON.stringify({ name }),
         });
         const data = await response.json();
-        document.getElementById("helloResponse").value = data.message;
+        document.getElementById("helloPostResponse").value = data.message;
       }
 
-      async function callGoodbyeApi() {
+      async function callGetGoodbyeApi() {
         const response = await fetch("/.netlify/functions/goodbye-get");
         const data = await response.json();
-        document.getElementById("goodbyeResponse").value = data.message;
+        document.getElementById("goodbyeGetResponse").value = data.message;
       }
     </script>
   </body>
