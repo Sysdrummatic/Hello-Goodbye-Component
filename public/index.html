@@ -22,7 +22,7 @@
     <script>
       async function callHelloApi() {
         const name = document.getElementById("nameInput").value;
-        const response = await fetch("/.netlify/functions/hello", {
+        const response = await fetch("/.netlify/functions/hello-post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@
       }
 
       async function callGoodbyeApi() {
-        const response = await fetch("/.netlify/functions/goodbye");
+        const response = await fetch("/.netlify/functions/goodbye-get");
         const data = await response.json();
         document.getElementById("goodbyeResponse").value = data.message;
       }
