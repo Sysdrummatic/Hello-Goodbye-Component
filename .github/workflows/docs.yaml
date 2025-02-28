@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'api-spec/**'  # Trigger only when OpenAPI spec changes
+      - 'api-specs/**'  # Trigger only when OpenAPI spec changes
 jobs:
   lint-and-deploy:
     runs-on: ubuntu-latest
@@ -24,14 +24,14 @@ jobs:
 
       # Lint OpenAPI spec
       - name: Lint OpenAPI Spec
-        run: redocly lint docs/api-specs/api-v1.yaml
+        run: redocly lint api-specs/api-v1.yaml
 
       # Build docs
       - name: Build Docs
         run: |
-          redocly bundle docs/api-specs/api-v1.yaml --output docs/bundeled-api-v1.yaml
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
           # Optional: Generate HTML using Redoc
-          redocly build-docs docs/bundeled-api-v1.yaml --output docs/index.html
+          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
 
       # Deploy to Netlify
       - name: Deploy to Netlify
