@@ -1,10 +1,9 @@
 name: Build and Deploy Docs
 
-on: 
-  push:
-    branches: [master]  # Ensure this matches your default branch name
-    paths:
-      - 'api-specs/**'  # Ensure this matches the correct path
+on: push
+    # branches: [master]  # Ensure this matches your default branch name
+    # paths:
+    #   - 'api-specs/**'  # Ensure this matches the correct path
 # permissions:
 #   contents: write
 jobs:
