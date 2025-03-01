@@ -21,20 +21,20 @@ jobs:
         with:
           node-version: 20
 
-      # # Install Redocly CLI
-      # - name: Install Redocly CLI
-      #   run: npm install -g @redocly/cli
+      # Install Redocly CLI
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
 
-      # # Lint OpenAPI spec
-      # - name: Lint OpenAPI Spec
-      #   run: redocly lint api-specs/api-v1.yaml  # Ensure this matches the correct path
+      # Lint OpenAPI spec
+      - name: Lint OpenAPI Spec
+        run: redocly lint api-specs/api-v1.yaml  # Ensure this matches the correct path
 
-      # # Build docs
-      # - name: Build Docs
-      #   run: |
-      #     redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml  # Ensure this matches the correct path
-      #     # Optional: Generate HTML using Redoc
-      #     redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html  # Ensure this matches the correct path
+      # Build docs
+      - name: Build Docs
+        run: |
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml  # Ensure this matches the correct path
+          # Optional: Generate HTML using Redoc
+          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html  # Ensure this matches the correct path
 
       # Deploy to Netlify
       - name: Deploy to Netlify
