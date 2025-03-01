@@ -1,13 +1,14 @@
 name: Build and Deploy Docs
-on:
-  push:
-    branches: [main]  # Ensure this matches your default branch name
-    paths:
-      - 'api-specs/**'  # Ensure this matches the correct path
-permissions:
-  contents: write
+
+on: push
+    # branches: [main]  # Ensure this matches your default branch name
+    # paths:
+    #   - 'api-specs/**'  # Ensure this matches the correct path
+# permissions:
+#   contents: write
 jobs:
   lint-and-deploy:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       # Checkout code
@@ -35,11 +36,11 @@ jobs:
       #     # Optional: Generate HTML using Redoc
       #     redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html  # Ensure this matches the correct path
 
-      # # Deploy to Netlify
-      # - name: Deploy to Netlify
-      #   uses: netlify/actions/cli@v2
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   with:
-      #     args: deploy --dir=docs --prod
+      # Deploy to Netlify
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@v2
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=docs --prod
