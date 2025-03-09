@@ -3,11 +3,11 @@ name: Build and Deploy Docs
 on: push
 
 jobs:
-  lint-and-deploy:
+  workflow:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      
+
       # Checkout code
       - name: Checkout
         uses: actions/checkout@v4
