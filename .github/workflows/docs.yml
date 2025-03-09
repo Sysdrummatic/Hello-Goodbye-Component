@@ -6,11 +6,11 @@ jobs:
   workflow:
     name: Test
     runs-on: ubuntu-latest
-    steps:
+    # steps:
 
-      # Checkout code
-      - name: Checkout
-        uses: actions/checkout@v4
+    #   # Checkout code
+    #   - name: Checkout
+    #     uses: actions/checkout@v4
 
       # # Set up Node.js
       # - name: Setup Node.js
