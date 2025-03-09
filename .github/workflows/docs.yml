@@ -1,11 +1,10 @@
 name: Build and Deploy Docs
-on:
-  push:
-    branches: [master]
-    paths:
-      - 'api-spec/**'  # Trigger only when OpenAPI spec changes
+
+on: push
+
 jobs:
   lint-and-deploy:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       # Checkout code
@@ -24,20 +23,19 @@ jobs:
 
       # Lint OpenAPI spec
       - name: Lint OpenAPI Spec
-        run: redocly lint api-spec/api-v1.yaml
+        run: redocly lint api-specs/api-v1.yaml
 
       # Build docs
       - name: Build Docs
         run: |
-          redocly bundle api-spec/api-v1.yaml --output docs/bundled-api-v1.yaml
-          # Optional: Generate HTML using Redoc
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
           redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
 
-      # Deploy to Netlify
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@v2
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=docs --prod
+      # # Deploy to Netlify
+      # - name: Deploy to Netlify
+      #   uses: netlify/actions/cli@v2
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #   with:
+      #     args: deploy --dir=docs --prod
