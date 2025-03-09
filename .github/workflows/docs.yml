@@ -1,11 +1,7 @@
 name: Build and Deploy Docs
 
 on: push
-    # branches: [master]  # Ensure this matches your default branch name
-    # paths:
-    #   - 'api-specs/**'  # Ensure this matches the correct path
-# permissions:
-#   contents: write
+
 jobs:
   lint-and-deploy:
     name: Test
@@ -27,14 +23,13 @@ jobs:
 
       # Lint OpenAPI spec
       - name: Lint OpenAPI Spec
-        run: redocly lint api-specs/api-v1.yaml  # Ensure this matches the correct path
+        run: redocly lint api-specs/api-v1.yaml
 
       # Build docs
       - name: Build Docs
         run: |
-          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml  # Ensure this matches the correct path
-          # Optional: Generate HTML using Redoc
-          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html  # Ensure this matches the correct path
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
+          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
 
       # # Deploy to Netlify
       # - name: Deploy to Netlify
