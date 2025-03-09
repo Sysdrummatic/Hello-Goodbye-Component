@@ -7,15 +7,15 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      # # Checkout code
-      # - name: Checkout
-      #   uses: actions/checkout@v4
+      # Checkout code
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # # Set up Node.js
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       # Install Redocly CLI
       - name: Install Redocly CLI
