@@ -5,6 +5,7 @@ info:
   description: First API
 servers:
   - url: http://localhost:3000
+security: []
 paths:
   /api/v1/hello:
     get:
