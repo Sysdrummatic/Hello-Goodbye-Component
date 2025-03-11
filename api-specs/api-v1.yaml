@@ -3,6 +3,9 @@ info:
   title: My API
   version: 1.0.0
   description: First API
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 servers:
   - url: http://localhost:3000
 security: []
@@ -21,6 +24,16 @@ paths:
                   message:
                     type: string
                     example: Hello World
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bad request            
     post:
       summary: Returns a personalized greeting message
       requestBody:
@@ -44,6 +57,16 @@ paths:
                   message:
                     type: string
                     example: Hello YourName
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bad request              
   /api/v1/goodbye:
     get:
       summary: Zwraca wiadomość pożegnalną
@@ -59,3 +82,13 @@ paths:
                     type: string
                     description: Wiadomość pożegnalna
                     example: Goodbye World
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bad request              
