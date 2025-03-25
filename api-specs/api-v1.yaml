@@ -3,8 +3,13 @@ info:
   title: My API
   version: 1.0.0
   description: First API
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 servers:
   - url: http://localhost:3000
+security: 
+  - api_keys: []
 paths:
   /api/v1/hello:
     get:
@@ -20,6 +25,16 @@ paths:
                   message:
                     type: string
                     example: Hello World
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bad request            
     post:
       summary: Returns a personalized greeting message
       requestBody:
@@ -43,12 +58,8 @@ paths:
                   message:
                     type: string
                     example: Hello YourName
-  /api/v1/goodbye:
-    get:
-      summary: Zwraca wiadomość pożegnalną
-      responses:
-        200:
-          description: Wiadomość pożegnalna
+        400:
+          description: Bad request
           content:
             application/json:
               schema:
@@ -56,5 +67,35 @@ paths:
                 properties:
                   message:
                     type: string
-                    description: Wiadomość pożegnalna
+                    example: Bad request              
+  /api/v1/goodbye:
+    get:
+      summary: Return goodbye message
+      responses:
+        200:
+          description: Goodbye message.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Goodbye message.
                     example: Goodbye World
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bad request              
+components: 
+  securitySchemes:
+    api_keys:
+      type: apiKey
+      in: header
+      name: X-API-Key
