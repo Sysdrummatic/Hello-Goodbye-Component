@@ -8,7 +8,8 @@ info:
     url: https://opensource.org/licenses/MIT
 servers:
   - url: http://localhost:3000
-security: []
+security: 
+  - api_keys: []
 paths:
   /api/v1/hello:
     get:
@@ -69,10 +70,10 @@ paths:
                     example: Bad request              
   /api/v1/goodbye:
     get:
-      summary: Zwraca wiadomość pożegnalną
+      summary: Return goodbye message
       responses:
         200:
-          description: Wiadomość pożegnalna
+          description: Goodbye message.
           content:
             application/json:
               schema:
@@ -80,7 +81,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    description: Wiadomość pożegnalna
+                    description: Goodbye message.
                     example: Goodbye World
         400:
           description: Bad request
@@ -92,3 +93,9 @@ paths:
                   message:
                     type: string
                     example: Bad request              
+components: 
+  securitySchemes:
+    api_keys:
+      type: apiKey
+      in: header
+      name: X-API-Key
