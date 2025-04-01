@@ -32,11 +32,9 @@ jobs:
           redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
           redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
 
-      # # Deploy to Netlify
-      # - name: Deploy to Netlify
-      #   uses: netlify/actions/cli@v2
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   with:
-      #     args: deploy --dir=docs --prod
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs
