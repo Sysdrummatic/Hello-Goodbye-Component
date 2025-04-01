@@ -1,9 +1,14 @@
 name: Build and Deploy Docs
 
-on: push
+on:
+  push:
+    branches:
+      - main # Or your default branch name (e.g., master)
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
-  build: # Keep your existing build job - rename it for clarity
+  build:
     name: Build Docs and Lint
     runs-on: ubuntu-latest
     steps:
@@ -31,14 +36,20 @@ jobs:
           redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
           redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
 
-      # Upload docs artifact
-      - name: Upload Docs Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: docs-output # Name of the artifact
-          path: docs # Path to the 'docs' directory containing index.html
+      # --- Optional Debugging Step (Uncomment if still having issues) ---
+      # - name: List contents of docs directory
+      #   run: ls -R docs
+      # --- End Debugging ---
 
-  deploy: # Add a new deploy job
+      # Upload docs artifact (Using v4)
+      - name: Upload Docs Artifact
+        uses: actions/upload-artifact@v4 # <-- Updated to v4
+        with:
+          name: docs-output # Keep the name consistent
+          path: docs # Path to the 'docs' directory containing index.html
+          retention-days: 1 # Optional: Keep artifacts for fewer days
+
+  deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: build # Ensure 'deploy' job runs after 'build' job is successful
@@ -50,20 +61,32 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docs-output # Name of the artifact we uploaded in the 'build' job
-          path: docs-to-deploy # Download to a 'docs-to-deploy' directory in the deploy job
+      # No checkout needed here if only using artifact
 
+      # Setup Pages (Using v4)
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v4 # <-- Updated to v4
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+      # Download artifact (Using v4)
+      - name: Download Artifact
+        uses: actions/download-artifact@v4 # <-- Updated to v4
         with:
-          path: docs-to-deploy # Path to the directory containing your static site
+          name: docs-output # Must match the upload name
 
+      # --- Debugging Step: Check downloaded files ---
+      # - name: List downloaded artifact contents
+      #   run: ls -R .
+      # --- End Debugging ---
+
+      # Upload Pages artifact (Using v3 - this is the latest for pages artifact)
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3 # <-- Use v3 for pages-artifact
+        with:
+          # By default, download-artifact@v4 puts files in the root.
+          # If you specified a 'path' in download-artifact, use that here.
+          path: '.' # Assuming download artifact puts files in the root
+
+      # Deploy to GitHub Pages (Using v4)
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4 # <-- Updated to v4
