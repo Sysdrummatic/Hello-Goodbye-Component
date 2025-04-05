@@ -24,13 +24,22 @@ jobs:
 
       # Lint OpenAPI spec
       - name: Lint OpenAPI Spec
-        run: redocly lint api-specs/api-v1.yaml
+        run: redocly lint api-specs/api-v1.yaml || exit 1
 
       # Build docs
       - name: Build Docs
         run: |
-          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
-          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
+          mkdir -p docs
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml || exit 1
+          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html || exit 1
+
+      # Verify Docs Output
+      - name: Verify Docs Output
+        run: |
+          if [ ! -s docs/index.html ]; then
+            echo "Error: Documentation build failed or output is empty."
+            exit 1
+          fi
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
