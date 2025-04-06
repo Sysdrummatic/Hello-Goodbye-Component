@@ -41,11 +41,15 @@ jobs:
             exit 1
           fi
 
+      # Debugging step: List contents of docs directory
+      - name: List Docs Directory
+        run: ls -la docs
+
       # Upload artifact for GitHub Pages
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
-          path: docs
+          path: ./docs
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
