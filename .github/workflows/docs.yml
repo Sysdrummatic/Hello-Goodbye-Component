@@ -45,9 +45,9 @@ jobs:
       - name: List Docs Directory
         run: ls -la docs
 
-      # # Upload artifact for GitHub Pages
-      # - name: Upload artifact for GitHub Pages
-      #   uses: actions/upload-pages-artifact@v1
+      # Upload artifact for GitHub Pages
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
       #   with:
       #     path: ./docs
 
