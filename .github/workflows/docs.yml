@@ -45,15 +45,15 @@ jobs:
       - name: List Docs Directory
         run: ls -la docs
 
-      # Upload artifact for GitHub Pages
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./docs
+      # # Upload artifact for GitHub Pages
+      # - name: Upload artifact for GitHub Pages
+      #   uses: actions/upload-pages-artifact@v1
+      #   with:
+      #     path: ./docs
 
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: pages
-        uses: actions/deploy-pages@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # # Deploy to GitHub Pages
+      # - name: Deploy to GitHub Pages
+      #   id: pages
+      #   uses: actions/deploy-pages@v1
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
