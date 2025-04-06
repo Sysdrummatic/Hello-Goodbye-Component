@@ -51,9 +51,9 @@ jobs:
         with:
           path: ./docs
 
-      # # Deploy to GitHub Pages
-      # - name: Deploy to GitHub Pages
-      #   id: pages
-      #   uses: actions/deploy-pages@v1
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: pages
+        uses: actions/deploy-pages@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
