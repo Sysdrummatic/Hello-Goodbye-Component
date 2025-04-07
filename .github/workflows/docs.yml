@@ -2,11 +2,6 @@ name: Build and Lint Docs
 
 on: push
 
-permissions:
-  id-token: write
-  contents: read
-  pages: write
-
 jobs:
   workflow:
     name: Test
@@ -29,37 +24,10 @@ jobs:
 
       # Lint OpenAPI spec
       - name: Lint OpenAPI Spec
-        run: redocly lint api-specs/api-v1.yaml || exit 1
+        run: redocly lint api-specs/api-v1.yaml
 
       # Build docs
       - name: Build Docs
         run: |
-          mkdir -p docs
-          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml || exit 1
-          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html || exit 1
-
-      # # Verify Docs Output
-      # - name: Verify Docs Output
-      #   run: |
-      #     if [ ! -s docs/index.html ]; then
-      #       echo "Error: Documentation build failed or output is empty."
-      #       exit 1
-      #     fi
-
-      # # Debugging step: List contents of docs directory
-      # - name: List Docs Directory
-      #   run: ls -la docs
-
-      # Upload artifact for GitHub Pages
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./docs
-          name: github-pages
-
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: pages
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages
+          redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml
+          redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html
