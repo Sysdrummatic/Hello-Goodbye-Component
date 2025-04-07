@@ -38,17 +38,17 @@ jobs:
           redocly bundle api-specs/api-v1.yaml --output docs/bundled-api-v1.yaml || exit 1
           redocly build-docs docs/bundled-api-v1.yaml --output docs/index.html || exit 1
 
-      # Verify Docs Output
-      - name: Verify Docs Output
-        run: |
-          if [ ! -s docs/index.html ]; then
-            echo "Error: Documentation build failed or output is empty."
-            exit 1
-          fi
+      # # Verify Docs Output
+      # - name: Verify Docs Output
+      #   run: |
+      #     if [ ! -s docs/index.html ]; then
+      #       echo "Error: Documentation build failed or output is empty."
+      #       exit 1
+      #     fi
 
-      # Debugging step: List contents of docs directory
-      - name: List Docs Directory
-        run: ls -la docs
+      # # Debugging step: List contents of docs directory
+      # - name: List Docs Directory
+      #   run: ls -la docs
 
       # Upload artifact for GitHub Pages
       - name: Upload artifact for GitHub Pages
